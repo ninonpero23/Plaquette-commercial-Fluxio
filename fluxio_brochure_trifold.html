@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Fluxio — Brochure commerciale</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ══════════ TOKENS ══════════ */
+:root {
+  --navy:   #1E1E49;
+  --navy2:  #131330;
+  --teal:   #4CCEC0;
+  --teal2:  #2FA89C;
+  --yellow: #F6EEA0;
+  --sky:    #96B9FF;
+  --cream:  #F7F6F2;
+  --white:  #FFFFFF;
+  --ink:    #2A2A4A;
+  --muted:  #6B6E8A;
+  --border: #E0E0EC;
+  --font-d: 'Quicksand', sans-serif;
+  --font-b: 'Inter', sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: var(--font-b);
+  color: var(--ink);
+  background: #DDDDDD;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ══════════ PRINT ══════════ */
+@media print {
+  body { background:white; }
+  .sheet { box-shadow:none !important; margin:0 !important; }
+  .sheet-label { display:none; }
+}
+@page { size: A4 landscape; margin: 0; }
+
+/* ══════════ SHEET = UNE PAGE A4 PAYSAGE ══════════ */
+.sheet {
+  width: 297mm;
+  height: 210mm;
+  display: flex;
+  position: relative;
+  background: var(--white);
+  box-shadow: 0 8px 40px rgba(0,0,0,.18);
+  margin: 10mm auto;
+  overflow: hidden;
+}
+
+.sheet-label {
+  position: fixed;
+  left: 4mm;
+  font-size: 9px;
+  color: #999;
+  font-family: sans-serif;
+  writing-mode: vertical-rl;
+}
+
+/* Lignes de pliure (guide visuel) */
+.sheet::before, .sheet::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: rgba(150,185,255,.25);
+  z-index: 10;
+  pointer-events: none;
+}
+.sheet::before { left: 99mm; }
+.sheet::after  { left: 198mm; }
+
+/* ══════════ PANNEAUX (3 × ~99mm) ══════════ */
+.panel {
+  width: 99mm;
+  height: 210mm;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  padding: 10mm 8mm;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ════ EXTÉRIEUR ════ */
+
+/* PANNEAU EXT-GAUCHE — Volet interne (vu en dernier, quand on déplie) */
+.panel-ext-left {
+  background: var(--cream);
+  padding: 10mm 8mm;
+}
+.ext-left-eyebrow {
+  font-size: 7pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--teal2); margin-bottom: 5mm; display: flex; align-items: center; gap: 4px;
+}
+.ext-left-eyebrow::before {
+  content:''; width: 12px; height: 2px; background: var(--teal); flex-shrink:0;
+}
+.ext-left-h2 {
+  font-family: var(--font-d); font-size: 14pt; font-weight: 700; color: var(--navy);
+  line-height: 1.2; margin-bottom: 4mm;
+}
+.ext-left-body {
+  font-size: 8.5pt; color: var(--muted); line-height: 1.6; margin-bottom: 6mm;
+}
+.stat-big {
+  font-family: var(--font-d); font-size: 34pt; font-weight: 700; color: var(--navy);
+  line-height: 1; margin-bottom: 1mm;
+}
+.stat-big span { color: var(--teal); }
+.stat-lbl { font-size: 8pt; color: var(--muted); line-height: 1.4; margin-bottom: 5mm; }
+.bullet-list {
+  display: flex; flex-direction: column; gap: 3mm; margin-top: 2mm;
+}
+.bullet-item {
+  display: flex; align-items: flex-start; gap: 3mm;
+  font-size: 8pt; color: var(--ink); line-height: 1.4;
+}
+.bullet-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--teal);
+  flex-shrink: 0; margin-top: 3px;
+}
+.badge-strip {
+  display: flex; flex-wrap: wrap; gap: 2mm; margin-top: auto;
+}
+.badge {
+  background: rgba(76,206,192,.12); color: var(--teal2);
+  border: 1px solid rgba(76,206,192,.3);
+  font-size: 7pt; font-weight: 700; padding: 1.5mm 3mm; border-radius: 20px;
+}
+
+/* PANNEAU EXT-CENTRE — Dos (tarifs + contact) */
+.panel-ext-center {
+  background: var(--white);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+.dos-sec { margin-bottom: 5mm; }
+.dos-eyebrow {
+  font-size: 7pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--teal2); margin-bottom: 3mm; display: flex; align-items: center; gap: 4px;
+}
+.dos-eyebrow::before { content:''; width:10px; height:2px; background:var(--teal); flex-shrink:0; }
+.dos-h3 { font-family: var(--font-d); font-size: 11pt; font-weight: 700; color: var(--navy); margin-bottom: 3mm; }
+.tarif-row {
+  display: flex; flex-direction: column; gap: 2.5mm;
+}
+.tarif-item {
+  border-radius: 7px; padding: 3mm 4mm;
+  border: 1.5px solid var(--border);
+}
+.tarif-item.featured {
+  background: var(--navy); border-color: var(--navy);
+}
+.tarif-item.featured .ti-name { color: var(--teal); }
+.tarif-item.featured .ti-price { color: var(--white); }
+.tarif-item.featured .ti-desc { color: rgba(255,255,255,.5); }
+.ti-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5mm; }
+.ti-name { font-size: 7.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.ti-price { font-family: var(--font-d); font-size: 14pt; font-weight: 700; color: var(--navy); line-height: 1; }
+.ti-price sup { font-size: 8pt; }
+.ti-desc { font-size: 7pt; color: var(--muted); line-height: 1.3; }
+.divider { height: 1px; background: var(--border); margin: 4mm 0; }
+.contact-block {
+  background: var(--navy); border-radius: 8px; padding: 4mm; margin-top: auto;
+}
+.contact-title { font-family: var(--font-d); font-size: 9pt; font-weight: 700; color: var(--white); margin-bottom: 2.5mm; }
+.contact-line {
+  display: flex; align-items: center; gap: 2.5mm;
+  font-size: 8pt; margin-bottom: 1.5mm;
+}
+.ci-icon { font-size: 10pt; }
+.ci-val { color: var(--teal); font-weight: 600; font-size: 8pt; }
+.ci-lbl { color: rgba(255,255,255,.5); font-size: 7.5pt; }
+
+/* PANNEAU EXT-DROITE — Couverture (face avant) */
+.panel-ext-right {
+  background: linear-gradient(150deg, var(--navy2) 0%, var(--navy) 60%, #232368 100%);
+  position: relative;
+  overflow: hidden;
+}
+.panel-ext-right::before {
+  content:''; position:absolute; border-radius:50%;
+  width: 80mm; height: 80mm; top: -25mm; right: -20mm;
+  background: radial-gradient(circle, rgba(76,206,192,.22) 0%, transparent 70%);
+}
+.panel-ext-right::after {
+  content:''; position:absolute; border-radius:50%;
+  width: 60mm; height: 60mm; bottom: -15mm; left: -10mm;
+  background: radial-gradient(circle, rgba(150,185,255,.15) 0%, transparent 70%);
+}
+.cover-logo-wrap {
+  display: flex; align-items: center; gap: 3mm;
+  position: relative; z-index: 2; margin-bottom: auto;
+}
+.cover-logo { width: 32px; height: 32px; object-fit: contain; }
+.cover-wordmark { font-family: var(--font-d); font-size: 18pt; font-weight: 700; color: var(--white); }
+.cover-body { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.cover-eyebrow {
+  font-size: 6.5pt; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 4mm;
+  display: flex; align-items: center; gap: 4px;
+}
+.cover-eyebrow::before { content:''; width:10px; height:1.5px; background:var(--teal); flex-shrink:0; }
+.cover-h1 {
+  font-family: var(--font-d); font-size: 18pt; font-weight: 700;
+  color: var(--white); line-height: 1.15; margin-bottom: 3mm;
+}
+.cover-h1 em { color: var(--teal); font-style: normal; display: block; }
+.cover-desc {
+  font-size: 8pt; color: rgba(255,255,255,.7); line-height: 1.5; margin-bottom: 5mm;
+}
+.cover-stats { display: flex; flex-direction: column; gap: 3mm; }
+.cstat { display: flex; align-items: baseline; gap: 3mm; }
+.cstat-num { font-family: var(--font-d); font-size: 18pt; font-weight: 700; color: var(--teal); line-height:1; }
+.cstat-lbl { font-size: 7pt; color: rgba(255,255,255,.55); line-height: 1.3; }
+.cover-footer { position: relative; z-index: 2; margin-top: auto; }
+.cover-footer-tag {
+  font-size: 6.5pt; color: rgba(255,255,255,.4);
+  display: flex; align-items: center; gap: 3px;
+}
+.cover-footer-tag::before {
+  content:''; width:5px; height:5px; border-radius:50%; background:var(--teal); flex-shrink:0;
+}
+
+/* ════ INTÉRIEUR ════ */
+
+/* PANNEAU INT-GAUCHE — Le constat */
+.panel-int-left {
+  background: var(--white);
+}
+.int-eyebrow {
+  font-size: 7pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--teal2); margin-bottom: 3mm; display: flex; align-items: center; gap: 4px;
+}
+.int-eyebrow::before { content:''; width:12px; height:2px; background:var(--teal); flex-shrink:0; }
+.int-h2 {
+  font-family: var(--font-d); font-size: 14pt; font-weight: 700; color: var(--navy);
+  line-height: 1.2; margin-bottom: 3mm;
+}
+.int-body { font-size: 8.5pt; color: var(--muted); line-height: 1.6; margin-bottom: 5mm; }
+.prob-card {
+  display: flex; align-items: flex-start; gap: 3mm;
+  padding: 3mm 3.5mm; border-radius: 7px; margin-bottom: 2.5mm;
+  border-left: 3px solid;
+}
+.prob-card.red { border-color: #E53935; background: #FFF5F5; }
+.prob-card.orange { border-color: #FB8C00; background: #FFFBF0; }
+.prob-card.blue { border-color: var(--sky); background: #F0F5FF; }
+.pc-icon { font-size: 12pt; flex-shrink: 0; }
+.pc-title { font-size: 8pt; font-weight: 700; color: var(--navy); margin-bottom: 1px; }
+.pc-desc { font-size: 7.5pt; color: var(--muted); line-height: 1.35; }
+.big-num {
+  font-family: var(--font-d); font-size: 42pt; font-weight: 700;
+  color: var(--navy); line-height: 1; margin-top: auto; padding-top: 3mm;
+}
+.big-num span { color: var(--teal); }
+.big-num-lbl { font-size: 7.5pt; color: var(--muted); margin-top: 1mm; }
+
+/* PANNEAU INT-CENTRE — Fonctionnement */
+.panel-int-center {
+  background: linear-gradient(180deg, var(--navy2) 0%, var(--navy) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.panel-int-center::before {
+  content:''; position:absolute; border-radius:50%;
+  width:70mm; height:70mm; top:-20mm; right:-20mm;
+  background:radial-gradient(circle, rgba(76,206,192,.18) 0%, transparent 70%);
+}
+.panel-int-center .int-eyebrow { color: var(--teal); position: relative; z-index:1; }
+.panel-int-center .int-h2 { color: var(--white); position: relative; z-index:1; margin-bottom: 4mm; }
+.steps { display: flex; flex-direction: column; gap: 3mm; position: relative; z-index:1; }
+.step {
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 8px; padding: 3mm 3.5mm;
+  display: flex; gap: 3mm; align-items: flex-start;
+}
+.step-n {
+  font-family: var(--font-d); font-size: 13pt; font-weight: 700; color: var(--teal);
+  line-height: 1; flex-shrink: 0; width: 7mm;
+}
+.step-title { font-family: var(--font-d); font-size: 9pt; font-weight: 700; color: var(--white); margin-bottom: 1.5mm; }
+.step-desc { font-size: 7.5pt; color: rgba(255,255,255,.55); line-height: 1.4; }
+.int-center-footer {
+  margin-top: auto; padding: 3mm; border-radius: 8px;
+  background: rgba(76,206,192,.15); border: 1px solid rgba(76,206,192,.25);
+  position: relative; z-index:1;
+}
+.icf-text {
+  font-family: var(--font-d); font-size: 8.5pt; font-weight: 600;
+  color: var(--teal); line-height: 1.4;
+}
+.icf-sub { font-size: 7.5pt; color: rgba(255,255,255,.45); margin-top: 1mm; }
+
+/* PANNEAU INT-DROITE — Bénéfices + Citation */
+.panel-int-right {
+  background: var(--cream);
+}
+.ben-list { display: flex; flex-direction: column; gap: 3mm; margin-bottom: 4mm; }
+.ben-item { display: flex; gap: 3mm; align-items: flex-start; }
+.ben-icon {
+  width: 26px; height: 26px; border-radius: 7px; flex-shrink: 0;
+  background: rgba(76,206,192,.15); display: flex; align-items: center; justify-content: center;
+  font-size: 11pt;
+}
+.ben-title { font-size: 8pt; font-weight: 700; color: var(--navy); margin-bottom: 1px; }
+.ben-desc { font-size: 7.5pt; color: var(--muted); line-height: 1.35; }
+.quote-box {
+  background: var(--navy); border-radius: 8px; padding: 4mm;
+  margin-top: auto; position: relative; overflow: hidden;
+}
+.quote-box::after {
+  content:''; position:absolute; bottom:-15mm; right:-15mm;
+  width:40mm; height:40mm; border-radius:50%;
+  background:radial-gradient(circle, rgba(76,206,192,.18) 0%, transparent 70%);
+}
+.qm { font-family: var(--font-d); font-size: 24pt; color: var(--teal); line-height:.7; margin-bottom:2mm; }
+.qt { font-family: var(--font-d); font-size: 8.5pt; font-weight: 600; color: var(--white); line-height: 1.45; margin-bottom: 3mm; }
+.qa { font-size: 7.5pt; font-weight: 700; color: var(--teal); }
+.qr { font-size: 7pt; color: rgba(255,255,255,.4); margin-top: 1px; }
+.q-kpis { display: flex; gap: 4mm; margin-top: 3mm; padding-top: 3mm; border-top: 1px solid rgba(255,255,255,.1); }
+.qk-num { font-family: var(--font-d); font-size: 12pt; font-weight: 700; color: var(--teal); }
+.qk-lbl { font-size: 6.5pt; color: rgba(255,255,255,.4); margin-top: 1px; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     FEUILLET 1 — EXTÉRIEUR (imprimé recto)
+     Quand la feuille est pliée, de gauche à droite :
+     volet interne | dos | couverture
+══════════════════════════════════════════════ -->
+<div class="sheet" id="sheet-ext">
+
+  <!-- VOLET INTERNE — vu quand on déplie (gauche) -->
+  <div class="panel panel-ext-left">
+    <div class="ext-left-eyebrow">Healthtech · Médecins libéraux</div>
+    <h2 class="ext-left-h2">Le retard fait partie du métier.<br>Le silence autour, non.</h2>
+    <p class="ext-left-body">
+      Chaque jour, des centaines de patients attendent sans savoir pourquoi. Ce n'est pas le retard qui frustre — c'est l'incertitude. Fluxio met fin à ce silence.
+    </p>
+    <div class="stat-big">40<span> min</span></div>
+    <div class="stat-lbl">d'attente moyenne en salle d'attente en France, sans information sur le délai</div>
+    <div class="bullet-list">
+      <div class="bullet-item"><div class="bullet-dot"></div><span>Compatible avec votre agenda (Doctolib, Outlook…)</span></div>
+      <div class="bullet-item"><div class="bullet-dot"></div><span>Mise en route en 10 minutes</span></div>
+      <div class="bullet-item"><div class="bullet-dot"></div><span>Aucune installation lourde côté cabinet</span></div>
+      <div class="bullet-item"><div class="bullet-dot"></div><span>Application iOS et Android pour vos patients</span></div>
+      <div class="bullet-item"><div class="bullet-dot"></div><span>Conforme RGPD &amp; HDS · Hébergé en France</span></div>
+    </div>
+    <div class="badge-strip" style="margin-top:4mm">
+      <span class="badge">Médecins généralistes</span>
+      <span class="badge">Spécialistes</span>
+      <span class="badge">Cabinets de groupe</span>
+      <span class="badge">Maisons de santé</span>
+    </div>
+  </div>
+
+  <!-- DOS — visible quand la brochure est fermée (centre) -->
+  <div class="panel panel-ext-center">
+    <div class="dos-sec">
+      <div class="dos-eyebrow">Les offres</div>
+      <div class="dos-h3">Simple et transparent.</div>
+      <div class="tarif-row">
+        <div class="tarif-item">
+          <div class="ti-header">
+            <div class="ti-name">Solo</div>
+            <div class="ti-price">19<sup>,90€</sup></div>
+          </div>
+          <div class="ti-desc">1 praticien · Notifications push &amp; SMS · Widget cabinet · Synchro agenda</div>
+        </div>
+        <div class="tarif-item featured">
+          <div class="ti-header">
+            <div class="ti-name">Solo Data ★</div>
+            <div class="ti-price">22<sup>,90€</sup></div>
+          </div>
+          <div class="ti-desc">Solo + IA prédiction retards · Statistiques avancées · Historique complet</div>
+        </div>
+        <div class="tarif-item">
+          <div class="ti-header">
+            <div class="ti-name">Groupé</div>
+            <div class="ti-price">89<sup>,90€</sup></div>
+          </div>
+          <div class="ti-desc">De 5 à 8 praticiens · Dashboard partagé · Tout Solo Data inclus · Support prioritaire</div>
+        </div>
+      </div>
+      <p style="font-size:7pt;color:var(--muted);margin-top:2mm">Prix HT / mois · Sans engagement</p>
+    </div>
+    <div class="divider"></div>
+    <div class="contact-block">
+      <div class="contact-title">Réserver une démo — 20 min</div>
+      <div class="contact-line">
+        <span class="ci-icon">✉</span>
+        <span class="ci-lbl">Email</span>
+        <span class="ci-val">demo@fluxio.fr</span>
+      </div>
+      <div class="contact-line">
+        <span class="ci-icon">🌐</span>
+        <span class="ci-lbl">Site</span>
+        <span class="ci-val">www.fluxio.fr</span>
+      </div>
+      <div style="margin-top:3mm;padding-top:3mm;border-top:1px solid rgba(255,255,255,.12)">
+        <div style="display:flex;align-items:center;gap:3mm">
+          <div style="width:18mm;height:18mm;background:white;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:6pt;color:#999;text-align:center;line-height:1.2;padding:2px">QR<br>fluxio.fr</div>
+          <div style="font-size:7pt;color:rgba(255,255,255,.4);line-height:1.4">Scannez pour<br>accéder au site<br>et réserver votre démo</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:auto;display:flex;align-items:center;gap:3mm;padding-top:4mm">
+      <img src="data:image/png;base64,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" width="20" height="20" style="object-fit:contain" alt="Fluxio">
+      <span style="font-family:var(--font-d);font-size:11pt;font-weight:700;color:var(--navy)">fluxio</span>
+      <span style="font-size:7pt;color:var(--muted);margin-left:1mm">Le retard s'anticipe.</span>
+    </div>
+  </div>
+
+  <!-- COUVERTURE — face avant visible (droite) -->
+  <div class="panel panel-ext-right">
+    <div class="cover-logo-wrap">
+      <img class="cover-logo" src="data:image/png;base64,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" alt="Fluxio">
+      <span class="cover-wordmark">fluxio</span>
+    </div>
+    <div class="cover-body">
+      <div class="cover-eyebrow">Solution Healthtech · Cabinets médicaux</div>
+      <h1 class="cover-h1">
+        Vos patients informés.
+        <em>Votre salle d'attente apaisée.</em>
+      </h1>
+      <p class="cover-desc">
+        Un retard signalé en un clic sur le widget du cabinet → une notification reçue en temps réel sur l'application du patient. Plus d'attente dans l'incertitude.
+      </p>
+      <div class="cover-stats">
+        <div class="cstat">
+          <div class="cstat-num">−45%</div>
+          <div class="cstat-lbl">Attente perçue<br>réduite</div>
+        </div>
+        <div class="cstat">
+          <div class="cstat-num">−60%</div>
+          <div class="cstat-lbl">Appels entrants<br>au secrétariat</div>
+        </div>
+        <div class="cstat">
+          <div class="cstat-num">10 min</div>
+          <div class="cstat-lbl">Mise en route<br>le jour même</div>
+        </div>
+      </div>
+    </div>
+    <div class="cover-footer">
+      <div class="cover-footer-tag">Conforme RGPD &amp; HDS · Données hébergées en France</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     FEUILLET 1 — INTÉRIEUR (imprimé verso)
+     De gauche à droite : Le constat | Fonctionnement | Bénéfices
+══════════════════════════════════════════════ -->
+<div class="sheet" id="sheet-int">
+
+  <!-- LE CONSTAT (gauche) -->
+  <div class="panel panel-int-left">
+    <div class="int-eyebrow">Le constat</div>
+    <h2 class="int-h2">Un retard non communiqué coûte cher à tout le cabinet.</h2>
+    <p class="int-body">Ce qui manque n'est pas la volonté — c'est l'information. En l'absence de retour, l'inquiétude s'installe et les appels se multiplient.</p>
+    <div class="prob-card red">
+      <div class="pc-icon">📞</div>
+      <div>
+        <div class="pc-title">Le secrétariat surchargé</div>
+        <div class="pc-desc">Même message répété des dizaines de fois : "Le Dr revient dans combien de temps ?"</div>
+      </div>
+    </div>
+    <div class="prob-card orange">
+      <div class="pc-icon">⏳</div>
+      <div>
+        <div class="pc-title">L'attente vécue comme un manque de respect</div>
+        <div class="pc-desc">Un patient qui ne sait pas combien de temps il va attendre développe rapidement de la frustration.</div>
+      </div>
+    </div>
+    <div class="prob-card blue">
+      <div class="pc-icon">📊</div>
+      <div>
+        <div class="pc-title">Un impact sur les avis en ligne</div>
+        <div class="pc-desc">73% des avis négatifs mentionnent l'attente — pas la qualité du soin.</div>
+      </div>
+    </div>
+    <div class="big-num">40<span> min</span></div>
+    <div class="big-num-lbl">d'attente moyenne en salle — sans savoir pourquoi</div>
+  </div>
+
+  <!-- COMMENT ÇA MARCHE (centre) -->
+  <div class="panel panel-int-center">
+    <div class="int-eyebrow">Le fonctionnement</div>
+    <h2 class="int-h2" style="color:white;margin-bottom:4mm">Trois étapes.<br>Un seul réflexe.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div>
+          <div class="step-title">Le praticien signale le retard</div>
+          <div class="step-desc">Un widget discret reste affiché en arrière-plan du poste de travail. Un clic suffit, durée estimée incluse, sans quitter la consultation en cours.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div>
+          <div class="step-title">Fluxio recalcule chaque créneau</div>
+          <div class="step-desc">L'algorithme met à jour automatiquement l'heure de passage de chaque patient de la journée, en cascade, en quelques secondes.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div>
+          <div class="step-title">Le patient est notifié</div>
+          <div class="step-desc">Notification push ou SMS : il sait quand partir de chez lui. Il arrive au bon moment. La salle d'attente se vide. L'anxiété disparaît.</div>
+        </div>
+      </div>
+    </div>
+    <div class="int-center-footer">
+      <div class="icf-text">Synchro Doctolib · Outlook · LGP</div>
+      <div class="icf-sub">Compatible avec vos outils existants</div>
+    </div>
+  </div>
+
+  <!-- BÉNÉFICES + CITATION (droite) -->
+  <div class="panel panel-int-right">
+    <div class="int-eyebrow">Les bénéfices</div>
+    <h2 class="int-h2">Moins de charge,<br>plus de sérénité.</h2>
+    <div class="ben-list">
+      <div class="ben-item">
+        <div class="ben-icon">📞</div>
+        <div>
+          <div class="ben-title">Jusqu'à −60% d'appels entrants</div>
+          <div class="ben-desc">Les patients sont informés avant d'appeler — le secrétariat est libéré.</div>
+        </div>
+      </div>
+      <div class="ben-item">
+        <div class="ben-icon">💛</div>
+        <div>
+          <div class="ben-title">Satisfaction patient en hausse</div>
+          <div class="ben-desc">Une attente comprise est une attente acceptée. La transparence rassure.</div>
+        </div>
+      </div>
+      <div class="ben-item">
+        <div class="ben-icon">🏅</div>
+        <div>
+          <div class="ben-title">Image professionnelle renforcée</div>
+          <div class="ben-desc">Un cabinet qui communique en temps réel inspire confiance dès la première visite.</div>
+        </div>
+      </div>
+      <div class="ben-item">
+        <div class="ben-icon">🤖</div>
+        <div>
+          <div class="ben-title">IA de prédiction des retards</div>
+          <div class="ben-desc">Fluxio analyse vos données historiques et anticipe les journées à risque.</div>
+        </div>
+      </div>
+    </div>
+    <div class="quote-box">
+      <div class="qm">&ldquo;</div>
+      <div class="qt">Depuis Fluxio, mes patients ne m'appellent plus pour savoir où j'en suis. Ils le savent déjà.</div>
+      <div class="qa">Dr. A. Roussel</div>
+      <div class="qr">Médecin généraliste · Nantes</div>
+      <div class="q-kpis">
+        <div>
+          <div class="qk-num">−45%</div>
+          <div class="qk-lbl">Attente perçue</div>
+        </div>
+        <div>
+          <div class="qk-num">−60%</div>
+          <div class="qk-lbl">Appels entrants</div>
+        </div>
+        <div>
+          <div class="qk-num">+4.8★</div>
+          <div class="qk-lbl">Note Google</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
